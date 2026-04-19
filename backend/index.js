@@ -10,7 +10,14 @@ const chatRoutes = require('./routes/chat.route.js');
 const app = express();
 
 // Define allowed origins and methods
-const allowedOrigins = ['http://localhost:3000'];
+// Accepts a comma-separated list via env var ALLOWED_ORIGINS (recommended for production)
+const envOrigins = (process.env.ALLOWED_ORIGINS || '')
+  .split(',')
+  .map((s) => s.trim())
+  .filter(Boolean);
+const allowedOrigins = envOrigins.length
+  ? envOrigins
+  : ['http://localhost:3000'];
 const allowedMethods = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'];
 
 // Custom CORS Middleware
