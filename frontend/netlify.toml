@@ -3,6 +3,9 @@
   publish = "build"
   command = "npm run build"
 
+[build.environment]
+  CI = "false"
+
 # SPA fallback — every unknown path serves index.html so React Router handles it
 [[redirects]]
   from = "/*"
